@@ -1,0 +1,90 @@
+oov是识别不出变量名字 
+graph model typilus 是聚类的方法 类型在训练集中没有
+
+1pretraining graph没有capture住长距离信息 训练的时候只从结点传到邻居节点 但是训练次数和时间爆炸   数据流图
+rnn+gnn+rnn
+2都把类型变成一个label
+把用户自定义的类型 也变成vector表示
+rnn放comment gnn没放comment
+3 graph design  
+ast
+现有的优化 加上去
+静态分析 作推断
+静态分析+gnn+静态分析
+静态分析 作预处理 pytype pysonar 选他们推断的一样的变量扩充 先做
+extract dfg data flow graph 重要work 自己根据规则来写 需要按照自己的修改 去尝试一下
+抓取 collect用户自定义类型的实现 先做
+定义 定型规则 有一套形式化表达 （学长做）
+
+用静态分析去缩小模型的范围
+留下可能的 
+静态分析和gnn的折中
+准确率高   召回率高
+
+dfg基本形式 构造 根据定义自己实现 遍历ast
+熟悉pytype  -j24 这样可以跑快点
+pysonar两个工具 需要 在docker里跑
+pytype会递归找import的文件 可能死循环 
+pysonar会很快 但精度没那么高 output是一个网页 以标签形式 写一个程序把类型抽出来.pyi
+就可以用pytorch把他们merge了 html beautifulsoap
+扩充之后 精度就会提高很多
+
+可以完全解决oov 
+subtyping
+python调用一堆包 
+
+
+12.4
+
+变得输入和typilus一样
+pyi结构
+pytorch是否支持局部变量
+如果不支持可能需要 ast
+
+html -> pyi 
+可以用python写这个数据转换的工作
+
+ast 抽象语法树 加那些变量
+函数标注和变量标注 
+加在python源文件里
+
+做不出来也没问题 
+但是需要告诉老师 做到哪里了 遇到什么问题 大概怎么解决吧
+
+毕设汇报1218
+1 实现了ast的构建 但还没做好变量标注和函数标注
+
+2 重新用BeautifulSoap提取了html的数据
+只用函数名加变量名确定类型不够准确，重新提取 代码的行号--变量名确定标注的变量
+ast其余工作 计划在周一前做完ast
+  ①变量标注里
+Numbers int float 
+String
+List
+Tuple
+Dictionary
+  ②函数标注具体是指
+function define argument
+有个域 
+{? -> ? | ConfigObj | [?] | dict | list}   typing.Set[Union[ConfigObj, dict, list]]
+参数和返回值要分开看 str->?
+returns 
+ast数据处理
+
+
+
+
+1225
+graph node局部性存在
+BASELINE 
+typilus sequence model path model
+pytype 六个数据集
+局部变量 函数
+ground truth 
+ctx=load()是右
+assign变成 
+annassign 
+transformer
+
+节点替换
+
